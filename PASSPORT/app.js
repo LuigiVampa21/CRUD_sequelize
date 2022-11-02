@@ -1,5 +1,5 @@
 require("dotenv").config();
-// require("./auth/passport");
+require("./utils/passport");
 const express = require("express");
 const morgan = require("morgan");
 const helmet = require("helmet");
@@ -10,6 +10,7 @@ const notFound = require("./middlewares/not-found");
 const errorHandler = require("./middlewares/error-handler");
 
 const authRoute = require("./routes/authRoute");
+const userRoute = require("./routes/userRoute");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/users", userRoute);
 
 app.use(notFound);
 app.use(errorHandler);

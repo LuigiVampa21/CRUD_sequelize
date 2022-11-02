@@ -1,6 +1,7 @@
 const { Sequelize } = require("sequelize");
 const User = require("../models/UserModel");
-const Op = Sequelize.Op;
+const jwt = require("jsonwebtoken");
+// const Op = Sequelize.Op;
 
 exports.register = async (req, res) => {
   try {
@@ -23,13 +24,24 @@ exports.register = async (req, res) => {
     });
   }
 };
+
 exports.login = async (req, res) => {
   try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ where: { email } });
+    if (!user) throw new Error("User does not exists");
+    if (user.password !== password) throw new Error("Passwords does not match");
+
+    const jwtToken = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.JWT_SECRET
+    );
     res.status(200).json({
       data: "Ok",
+      token: jwtToken,
     });
   } catch (err) {
-    res.status(400).json({
+    res.status(500).json({
       err,
     });
   }
