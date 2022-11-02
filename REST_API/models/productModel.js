@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("../config/db");
+// const Review = require("./reviewModel");
 
 const Product = sequelize.define("Product", {
   image: {

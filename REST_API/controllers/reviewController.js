@@ -8,13 +8,16 @@ exports.getAllReviews = async (req, res) => {
 
 exports.createReview = async (req, res) => {
   const { id } = req.params;
+  const { rating, description } = req.body;
 
   let data = {
     product_id: id,
-    rating: req.body.rating,
-    description: req.body.description,
+    rating,
+    description,
   };
 
   const review = await Review.create(data);
-  res.status(201).send(review);
+  res.status(201).json({
+    review,
+  });
 };

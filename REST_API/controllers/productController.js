@@ -57,3 +57,21 @@ exports.getAllPublishedProducts = async (req, res) => {
     products,
   });
 };
+
+exports.getAllProductWithReviews = async (req, res) => {
+  const { id } = req.params;
+
+  const data = await Product.findOne({
+    include: [
+      {
+        model: Review,
+        as: "review",
+      },
+    ],
+    where: { id: id },
+  });
+
+  res.status(200).json({
+    data,
+  });
+};
