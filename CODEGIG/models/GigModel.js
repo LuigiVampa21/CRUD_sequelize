@@ -16,4 +16,8 @@ const Gig = sequelize.define("gig", {
   },
 });
 
+async () => {
+  await Gig.sync();
+};
+
 module.exports = Gig;
