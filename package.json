@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/LuigiVampa21/CRUD_sequelize/issues"
   },
-  "homepage": "https://github.com/LuigiVampa21/CRUD_sequelize#readme"
+  "homepage": "https://github.com/LuigiVampa21/CRUD_sequelize#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "pg": "^8.8.0",
+    "sequelize": "^6.25.3",
+    "sequelize-cli": "^6.5.2"
+  }
 }
