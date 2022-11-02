@@ -4,6 +4,7 @@ const cors = require("cors");
 const db = require("./config/db");
 
 const app = express();
+const productRoute = require("./routes/productRoute");
 
 const notFound = require("./middlewares/not-found");
 const errorHandler = require("./middlewares/error-handler");
@@ -20,6 +21,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("INDEX");
 });
+
+app.use("/api/v1/product", productRoute);
 
 app.use(notFound);
 app.use(errorHandler);
