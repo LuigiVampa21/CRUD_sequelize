@@ -65,7 +65,7 @@ exports.getAllProductWithReviews = async (req, res) => {
     include: [
       {
         model: Review,
-        as: "review",
+        // as: "review",
       },
     ],
     where: { id: id },
