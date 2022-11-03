@@ -13,8 +13,15 @@ exports.getAllProducts = async (req, res) => {
 };
 
 exports.createProduct = async (req, res) => {
+  // const url = req.protocol + "://" + req.get("host");
   const { title, price, description, published } = req.body;
-  const newProduct = await Product.create({ title, price, description });
+  const newProduct = await Product.create({
+    title,
+    price,
+    description,
+    published,
+    image: "/images/" + req.file.filename,
+  });
   res.status(200).json({
     newProduct,
   });
@@ -30,8 +37,21 @@ exports.getSingleProduct = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
   const { id } = req.params;
+  const { title, price, description, published } = req.body;
+  let image;
+  if (req.file) {
+    // const url = req.protocol + "://" + req.get("host");
+    // image = url + "/images/" + req.file.filename;
+    image = "/images/" + req.file.filename;
+  }
   const product = await Product.findByPk(id);
-  await product.update(req.body);
+  await product.update({
+    title,
+    price,
+    description,
+    published,
+    image,
+  });
   res.status(201).json({
     product,
   });
